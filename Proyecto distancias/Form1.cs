@@ -19,8 +19,12 @@ namespace Proyecto_distancias
             InitializeComponent();
         }
 
+    
+
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             try
             {
                 int clientes = Int32.Parse(textBox3.Text);
@@ -31,15 +35,16 @@ namespace Proyecto_distancias
                distancia algoritmo = new distancia();
               // FuncionEuclideana algoritmo1=new FuncionEuclideana();
 
+
+
                 if (clientes > 0 &&  clientes < 18 && limiteinferior > -21 && limiteinferior < 21 && limitesuperior < 21 && limitesuperior > -21 && limitesuperior2 < 21 && limitesuperior2 > -21 && limiteinferior2 > -21 && limiteinferior2 < 21)
                 {
-                    List<int> LVA = algoritmo.distanciasaleatorias(limiteinferior, limitesuperior, clientes);
-                    List<int> LVA2 = algoritmo.distanciasaleatorias2(limiteinferior2, limitesuperior2, clientes);
-                  //  List<int> EU = algoritmo1.Euclideana;
+                   
 
+                    distancia algoritmoprueba = new distancia();
+                    algoritmoprueba.AlgoritmoSimulacion(limiteinferior, limitesuperior, clientes);
 
-
-                    llenarGrid(clientes, LVA, LVA2);
+                    //llenarGrid(clientes, LVA, LVA2);
                 }
                 else
                 {
