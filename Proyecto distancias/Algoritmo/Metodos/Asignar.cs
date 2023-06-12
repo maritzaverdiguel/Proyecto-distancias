@@ -16,21 +16,44 @@ namespace Proyecto_distancias.Algoritmo.Metodos
        
         distancia secuenciar = new distancia();
         List<Camion> listaCamiones = new List<Camion>();
-        public void AsignarSecuenciar(List<Cliente> listaClientes, int n) 
+        public void GenerarCamiones(int n)
+        {
+
+            for (int i = 0; i < n; i++)
+            {
+                
+                Camion camion1 = new Camion();
+                camion1.fechaInicioAcumulado = 0;
+                camion1.idCamion = i;
+
+                listaCamiones.Add(camion1);
+
+                
+
+            }
+
+            
+        }
+
+
+        public void AsignarSecuenciar(List<Cliente> listaClientes, int n, double[,] matrizDistancias) 
         {
             listaClientes.OrderBy(x => x.Día).ToList();
-            // Esto va en un for, quiero 5 camiones
 
             GenerarCamiones(n);
+
 
             Random camionaleatorio = new Random(Environment.TickCount);
 
        
-            secuenciar.EncontrarDistancias(listaClientes);
+            //secuenciar.EncontrarDistancias(listaClientes);
+
+
+
             double[,] matriztiempos = new double[listaClientes.Count(), listaClientes.Count()];
 
             Cliente clientes = new Cliente();
-            clientes.velocidad = 80;
+            double velocidad = 80;
 
 
             int i = 0;
@@ -40,7 +63,7 @@ namespace Proyecto_distancias.Algoritmo.Metodos
                 foreach (Cliente cliente2 in listaClientes)
                 {
 
-                    double tiempo = cliente.distancia / cliente2.velocidad;
+                    double tiempo = matrizDistancias[cliente.idCliente-1, cliente2.idCliente-1] / velocidad;
 
 
                     matriztiempos[i, j] = tiempo;
@@ -58,33 +81,24 @@ namespace Proyecto_distancias.Algoritmo.Metodos
             
 
 
-                foreach (Cliente cliente in listaClientes) 
-
-
+            foreach (Cliente cliente in listaClientes) 
             {
-                int k = camionaleatorio.Next(1, n);
-                //cuando incia y cuando termina 
 
+                int k = camionaleatorio.Next(0, n);
+                Camion camionAsigando = listaCamiones[k];
+                if (camionAsigando.listaClientesAsignados.Count() == 0)
+                {
+                    camionAsigando.fechaInicioAcumulado = camionAsigando.fechaInicioAcumulado + 0;
+                }
+                else {
+                    camionAsigando.fechaInicioAcumulado = camionAsigando.fechaInicioAcumulado + matriztiempos[(int)camionAsigando.ultimoCliente,cliente.idCliente];
+                }
+                camionAsigando.ultimoCliente = cliente.idCliente;
 
-                listaCamiones[k].listaClientesAsignados.Add(cliente);
+                camionAsigando.listaClientesAsignados.Add(cliente);
             }
         }
-        public void GenerarCamiones(int n)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                // Esto va en un for, quiero 5 camiones
-                Camion camion1 = new Camion();
-
-                camion1.idCamion = i;
-                listaCamiones.Add(camion1);
-
-
-
-            }
-        }
-
-           
+       
 
 
 

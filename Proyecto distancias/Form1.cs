@@ -21,10 +21,10 @@ namespace Proyecto_distancias
         public Form1()
 
 
-          
-
+             
         {
             InitializeComponent();
+           
         }
 
     
@@ -35,16 +35,33 @@ namespace Proyecto_distancias
 
             try
             {
-                int clientes = Int32.Parse(textBox3.Text);
-                int limiteinferior = Int32.Parse(textBox1.Text);
-                int limitesuperior = Int32.Parse(textBox2.Text);
-                int limiteinferior2 = Int32.Parse(textBox5.Text);
-                int limitesuperior2 = Int32.Parse(textBox4.Text);
-               distancia algoritmo = new distancia();
+                
+                int clientes = int.Parse(textBox3.Text);
+                int limiteinferior = int.Parse(textBox1.Text);
+                int limitesuperior = int.Parse(textBox2.Text);
+                int limiteinferior2 = int.Parse(textBox5.Text);
+                int limitesuperior2 = int.Parse(textBox4.Text);
+                
+                
 
-                algoritmo.matriz(limiteinferior, limitesuperior2, limiteinferior2,limitesuperior,clientes);
+                int n = int.Parse(textBox6.Text);
+                double[,] matrizDistancias = new double[clientes, clientes];
+                distancia algoritmo = new distancia();
+                Asignar camiones = new Asignar();
 
+                if (limiteinferior> -20 && limiteinferior < 20 && limiteinferior2 > -20 && limiteinferior2 < 20 && limitesuperior2 > -20 && limitesuperior2 < 20 && limitesuperior > -20 && limitesuperior < 20 && clientes<20)
 
+                {
+                    List<Cliente> listaClientes = algoritmo.GenerarClientes(limiteinferior, limitesuperior, limiteinferior2, limitesuperior2,
+                  clientes);
+                    matrizDistancias = algoritmo.MatrizDistancias(listaClientes);
+                    camiones.AsignarSecuenciar(listaClientes, n, matrizDistancias);
+                }
+                    
+                else
+                {
+                    MessageBox.Show("Uno de los valores introducidos es incorrecto");
+                }
 
 
             }
@@ -57,13 +74,9 @@ namespace Proyecto_distancias
 
         }
 
-        
-          
-          
-    
-           
 
-      
+
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -110,6 +123,21 @@ namespace Proyecto_distancias
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

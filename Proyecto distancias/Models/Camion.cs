@@ -12,6 +12,8 @@ namespace Proyecto_distancias.Models
 
         public List<Cliente> listaClientesAsignados = new List<Cliente>();
         
-        
+        public double fechaInicioAcumulado { get; set; }
+
+        public double ultimoCliente { get; set; }
     }
 }

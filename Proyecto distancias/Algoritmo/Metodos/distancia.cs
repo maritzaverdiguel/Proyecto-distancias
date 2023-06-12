@@ -6,16 +6,16 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Proyecto_distancias.Algoritmo.Metodos
 {
     public class distancia
     {
-       
 
 
-        public List<Cliente> GenerarListaCliente(int limiteinferior, int limitesuperior,
-            int clientes, int limiteinferior2, int limitesuperior2)
+        public List<Cliente> GenerarListaCliente(int limiteinferior, int limitesuperior, int limiteinferior2, int limitesuperior2,
+            int clientes)
         {
             List<Cliente> listaClientes = new List<Cliente>();
             Random aleatorio = new Random(Environment.TickCount);
@@ -47,8 +47,7 @@ namespace Proyecto_distancias.Algoritmo.Metodos
 
 
 
-        public double[,] EncontrarDistancias(
-            List<Cliente> listaClientes)
+        public double[,] EncontrarDistancias(  List<Cliente> listaClientes )
         {
            
             double[,] matrizDistancias = new double[listaClientes.Count(), listaClientes.Count()];
@@ -65,9 +64,10 @@ namespace Proyecto_distancias.Algoritmo.Metodos
                         Math.Pow((cliente.longitud - cliente2.longitud), 2));
 
                     matrizDistancias[i, j] = distanciae;
+                    
 
                     cliente.distancia = distanciae;
-                    
+               
                     j++;
 
                 }
@@ -83,11 +83,19 @@ namespace Proyecto_distancias.Algoritmo.Metodos
             return matrizDistancias;
         }
 
-        public void matriz(int limiteinferior, int limitesuperior, int limiteinferior2, int limitesuperior2,
+        public List<Cliente>  GenerarClientes(int limiteinferior, int limitesuperior, int limiteinferior2, int limitesuperior2,
             int clientes) 
         {
-            List<Cliente> listaClientes= GenerarListaCliente(limiteinferior,  limitesuperior, limiteinferior2, limitesuperior2, clientes);
-            double[,] matrizDistancias= EncontrarDistancias(listaClientes);
+            List<Cliente> listaClientes = new List<Cliente>();
+            listaClientes = GenerarListaCliente(limiteinferior,  limitesuperior, limiteinferior2, limitesuperior2, clientes);
+             
+            return listaClientes;
+        }
+        public double[,] MatrizDistancias(List<Cliente> listaClientes)
+        {
+            double[,] matrizDistancias;
+            matrizDistancias = EncontrarDistancias(listaClientes);
+            return matrizDistancias;
         }
 
 
