@@ -11,7 +11,9 @@ namespace Proyecto_distancias.Algoritmo.Metodos
 {
     public class Asignar
 
+
     {
+       
         distancia secuenciar = new distancia();
         List<Camion> listaCamiones = new List<Camion>();
         public void AsignarSecuenciar(List<Cliente> listaClientes, int n) 
@@ -23,6 +25,7 @@ namespace Proyecto_distancias.Algoritmo.Metodos
 
             Random camionaleatorio = new Random(Environment.TickCount);
 
+       
             secuenciar.EncontrarDistancias(listaClientes);
             double[,] matriztiempos = new double[listaClientes.Count(), listaClientes.Count()];
 

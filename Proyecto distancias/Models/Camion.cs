@@ -11,5 +11,7 @@ namespace Proyecto_distancias.Models
         public int idCamion { get; set; }
 
         public List<Cliente> listaClientesAsignados = new List<Cliente>();
+        
+        
     }
 }
