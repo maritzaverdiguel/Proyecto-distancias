@@ -46,16 +46,23 @@ namespace Proyecto_distancias
 
                 int n = int.Parse(textBox6.Text);
                 double[,] matrizDistancias = new double[clientes, clientes];
+                double TiempoEsperado = new  double();
+                double TiempodeLLegada = new double();
+
+
                 distancia algoritmo = new distancia();
                 Asignar camiones = new Asignar();
+                List<Camion> listaCamiones = new List<Camion>();
 
-                if (limiteinferior> -20 && limiteinferior < 20 && limiteinferior2 > -20 && limiteinferior2 < 20 && limitesuperior2 > -20 && limitesuperior2 < 20 && limitesuperior > -20 && limitesuperior < 20 && clientes<20)
+                if ( clientes<20)
 
                 {
                     List<Cliente> listaClientes = algoritmo.GenerarClientes(limiteinferior, limitesuperior, limiteinferior2, limitesuperior2,
                   clientes);
                     matrizDistancias = algoritmo.MatrizDistancias(listaClientes);
                     camiones.AsignarSecuenciar(listaClientes, n, matrizDistancias);
+                    camiones.Kpi1(TiempoEsperado, TiempodeLLegada, listaClientes);
+                    camiones.Kpi2(listaCamiones);
                 }
                     
                 else

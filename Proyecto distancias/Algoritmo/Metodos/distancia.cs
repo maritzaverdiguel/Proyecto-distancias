@@ -29,9 +29,9 @@ namespace Proyecto_distancias.Algoritmo.Metodos
                 int valor2 = aleatorio.Next(limiteinferior2, limitesuperior2);
                 int valor3 = aleatorio.Next(0, 1000);
                 int valor4 = aleatorio.Next(1, 30);
-                int valor5 = aleatorio.Next(1, 3);
+                int valor5 = aleatorio.Next(1, 30);
                 cliente.Mes = valor4;
-                cliente.Día = valor5;
+                cliente.TiempoEsperado = valor5;
                 cliente.idCliente = j + 1;
                 cliente.demanda = valor3;
                 cliente.latitud = valor1;

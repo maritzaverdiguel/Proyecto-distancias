@@ -15,11 +15,11 @@ namespace Proyecto_distancias.Models
 
         public int idCliente { get; set; }
         public int Mes { get; set; }
-        public int Día { get; set; }
+        public int TiempoEsperado { get; set; }
 
         public int velocidad { get; set; }
         public double distancia{ get; set; }
-
+        public double TiempodeLLegada { get; set; }
         public Cliente() 
         { 
         
