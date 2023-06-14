@@ -103,61 +103,53 @@ namespace Proyecto_distancias.Algoritmo.Metodos
         }
 
         //coregir
-       public void Kpi1(double TiempoEsperado, double TiempodeLLegada, List<Cliente> listaClientes)
+       public int  Kpi1(double TiempoEsperado, double TiempodeLLegada, List<Cliente> listaClientes)
         {
             Camion camion = new Camion();
             camion.LlegadaTardia = 0;
-
+            int tardios = 0;
             foreach (Cliente cliente in listaClientes)
-            {
-
+            { 
                 
-               
-
-                
-                if (TiempodeLLegada > TiempoEsperado)
+                if (cliente.TiempodeLLegada > cliente.TiempoEsperado)
 
                 {
-                    camion.LlegadaTardia ++;
+                    tardios++;
 
                 }
 
                 else
                 {
-                    camion.LlegadaTardia = 0;
+                   // camion.LlegadaTardia = 0;
                 }
-                camion.listaCamionesTardios.Add(camion);
+                //camion.listaCamionesTardios.Add(camion);
             }
+            return tardios;
         }
 
        
-        public void Kpi2 (List<Camion> listaCamiones)
+        public double Kpi2 (List<Camion> listaCamiones)
         {
             Camion camion1 = new Camion();
-
+            double maximo = 0, minimo = 99999999;
             foreach (Camion camion in listaCamiones)
 
             {
-                camion.capacidadcamion= 5000;
-
-                int total = 0;
-                    foreach (Cliente cliente in camion1.listaClientesAsignados) 
+                double asignadoCamion = 0;
+                foreach (Cliente cliente in camion1.listaClientesAsignados) 
                 {
-                    camion1.cargaporcamion = cliente.demanda;
-                    total++;
+                    asignadoCamion = cliente.demanda + asignadoCamion;
                 }
-
-                camion.uti = camion1.cargaporcamion / camion.capacidadcamion;
-
-                camion1.utilizacioncamion.Add(camion);
+                if (asignadoCamion < minimo) 
+                {
+                    minimo = asignadoCamion;
+                }
+                if (maximo < asignadoCamion)
+                {
+                    maximo = asignadoCamion;
+                }
             }
-
-
-
-
-        }
-
-   
-            
+            return maximo;
+        }            
     }
 }
